@@ -72,7 +72,7 @@ deserialization of our future instances
 
 
 
-### Built With
+## Built With
 All the development and testing were run over an operating system Ubuntu 20.04 LTS using the programming language Python 3.8 The editors used were VIM 8.1, VSCode 1.6 Control version using Git 2.25 Style guidelines: pycodestyle (version 2.7.*) and PEP8.
 
 <br />
@@ -87,9 +87,6 @@ All the development and testing were run over an operating system Ubuntu 20.04 L
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Installation
 1. Clone the repo
