@@ -25,16 +25,16 @@ class BaseModel():
             self.updated_at = datetime.now()
             models.storage.new(self)
 
-    def __str__():
+    def __str__(self):
         """string of BaseModel instance"""
         return "[{}] ({}) {}".format(self.__class__.__name__,
                                      self.id, self.__dict__)
-    
+
     def save(self):
         """updates the public instance attribute updated_at"""
         self.updated_at = datetime.now()
         models.storage.save()
-    
+
     def to_dict(self):
         '''dictionary representation of instance'''
         new_dict = dict(self.__dict__)
@@ -42,4 +42,3 @@ class BaseModel():
         new_dict['updated_at'] = self.__dict__['updated_at'].isoformat()
         new_dict['__class__'] = self.__class__.__name__
         return (new_dict)
-
