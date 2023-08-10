@@ -14,6 +14,12 @@ from datetime import datetime
 import models
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+from models.user import User
+from models.state import State
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class TestFileStorage_instantiation(unittest.TestCase):
@@ -91,9 +97,35 @@ class TestFileStorage_methods(unittest.TestCase):
         Test if the 'new' method adds an instance to the storage dictionary.
         """
         base = BaseModel()
+        user = User()
+        state = State()
+        city = City()
+        amenity = Amenity()
+        place = Place()
+        review = Review()
+
         models.storage.new(base)
+        models.storage.new(user)
+        models.storage.new(state)
+        models.storage.new(city)
+        models.storage.new(amenity)
+        models.storage.new(place)
+        models.storage.new(review)
+
         self.assertIn("BaseModel." + base.id, models.storage.all().keys())
         self.assertIn(base, models.storage.all().values())
+        self.assertIn("User." + user.id, models.storage.all().keys())
+        self.assertIn(user, models.storage.all().values())
+        self.assertIn("State." + state.id, models.storage.all().keys())
+        self.assertIn(state, models.storage.all().values())
+        self.assertIn("City." + city.id, models.storage.all().keys())
+        self.assertIn(city, models.storage.all().values())
+        self.assertIn("Amenity." + amenity.id, models.storage.all().keys())
+        self.assertIn(amenity, models.storage.all().values())
+        self.assertIn("Place." + place.id, models.storage.all().keys())
+        self.assertIn(place, models.storage.all().values())
+        self.assertIn("Review." + review.id, models.storage.all().keys())
+        self.assertIn(review, models.storage.all().values())
 
     def test_new_method_with_args(self):
         """
@@ -116,12 +148,32 @@ class TestFileStorage_methods(unittest.TestCase):
         Test if the 'save' method correctly saves an instance to the file.
         """
         base = BaseModel()
+        user = User()
+        state = State()
+        city = City()
+        amenity = Amenity()
+        place = Place()
+        review = Review()
+
         models.storage.new(base)
+        models.storage.new(user)
+        models.storage.new(state)
+        models.storage.new(city)
+        models.storage.new(amenity)
+        models.storage.new(place)
+        models.storage.new(review)
+
         models.storage.save()
         saved = ""
         with open("data.json", 'r') as file:
             saved = file.read()
             self.assertIn("BaseModel." + base.id, saved)
+            self.assertIn("User." + user.id, saved)
+            self.assertIn("State." + state.id, saved)
+            self.assertIn("City." + city.id, saved)
+            self.assertIn("Amenity." + amenity.id, saved)
+            self.assertIn("Place." + place.id, saved)
+            self.assertIn("Review." + review.id, saved)
 
     def test_save_method_with_arg(self):
         """
@@ -135,9 +187,32 @@ class TestFileStorage_methods(unittest.TestCase):
         Test if the 'reload' method correctly loads objects from the file.
         """
         base = BaseModel()
+        user = User()
+        state = State()
+        city = City()
+        amenity = Amenity()
+        place = Place()
+        review = Review()
+
         models.storage.new(base)
+        models.storage.new(user)
+        models.storage.new(state)
+        models.storage.new(city)
+        models.storage.new(amenity)
+        models.storage.new(place)
+        models.storage.new(review)
+
+        models.storage.save()
+        models.storage.reload()
+
         objs = FileStorage._FileStorage__objects
         self.assertIn("BaseModel." + base.id, objs)
+        self.assertIn("User." + user.id, objs)
+        self.assertIn("State." + state.id, objs)
+        self.assertIn("City." + city.id, objs)
+        self.assertIn("Amenity." + amenity.id, objs)
+        self.assertIn("Place." + place.id, objs)
+        self.assertIn("Review." + review.id, objs)
 
     def test_reload_method_with_arg(self):
         """

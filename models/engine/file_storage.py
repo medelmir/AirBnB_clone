@@ -2,12 +2,12 @@
 """Defines the FileStorage class module."""
 import json
 from models.base_model import BaseModel
-#from models.user import User
-#from models.state import State
-#from models.city import City
-#from models.place import Place
-#from models.amenity import Amenity
-#from models.review import Review
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage():
@@ -41,7 +41,7 @@ class FileStorage():
         for obj in obj_dict.keys():
             instance = obj_dict[obj]
             serialized_objs[obj] = instance.to_dict()
-           
+
         with open(FileStorage.__file_path, 'w', encoding='utf-8') as file:
             json.dump(serialized_objs, file)
 
