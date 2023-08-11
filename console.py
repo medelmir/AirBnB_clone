@@ -2,6 +2,7 @@
 """cmd module"""
 
 import cmd
+import ast
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -108,6 +109,72 @@ class HBNBCommand(cmd.Cmd):
                 storage.all()[obj_key].save()
             else:
                 print("** no instance found **")
+
+    def default(self, line):
+        """Custom handling of <class name>.all()"""
+        parts = line.split('.')
+        if len(parts) == 2 and parts[1] == "all()":
+            class_name = parts[0]
+            if class_name in globals():
+                obj_list = []
+                for obj in storage.all().values():
+                    if type(obj).__name__ == class_name:
+                        obj_list.append(str(obj))
+                print(obj_list)
+            else:
+                print("** class doesn't exist **")
+        elif len(parts) == 2 and parts[1] == "count()":
+            class_name = parts[0]
+            if class_name in globals():
+                obj_count = 0
+                for obj in storage.all().values():
+                    if type(obj).__name__ == class_name:
+                        obj_count += 1
+                print(obj_count)
+        elif len(parts) == 2 and parts[1].startswith("show("):
+            class_name = parts[0]
+            if class_name in globals():
+                obj_id = parts[1][6:-2]
+                obj_key = class_name + "." + obj_id
+                if obj_key in storage.all():
+                    print(storage.all()[obj_key])
+                else:
+                    print("** no instance found **")
+            else:
+                print("** class doesn't exist **")
+        elif len(parts) == 2 and parts[1].startswith("destroy("):
+            class_name = parts[0]
+            if class_name in globals():
+                obj_id = parts[1][9:-2]
+                obj_key = class_name + "." + obj_id
+                if obj_key in storage.all():
+                    del storage.all()[obj_key]
+                    storage.save()
+                else:
+                    print("** no instance found **")
+            else:
+                print("** class doesn't exist **")
+        elif len(parts) == 2 and parts[1].startswith("update("):
+            class_name = parts[0]
+            if class_name in globals():
+                update_args = parts[1][7:-1].split(',')
+                if len(update_args) >= 3:
+                    obj_id = update_args[0].strip()[1:-1]
+                    obj_key = class_name + "." + obj_id
+                    if obj_key in storage.all():
+                        attribute_name = update_args[1].strip()[1:-1]
+                        attribute_value = update_args[2].strip()[1:-1]
+                        setattr(storage.all()[obj_key],
+                                attribute_name, attribute_value)
+                        storage.all()[obj_key].save()
+                    else:
+                        print("** no instance found **")
+                else:
+                    print("** invalid update syntax **")
+            else:
+                print("** class doesn't exist **")
+        else:
+            cmd.Cmd.default(self, line)
 
 
 if __name__ == '__main__':
