@@ -133,7 +133,7 @@ class TestBaseModel_save(unittest.TestCase):
         bm = BaseModel()
         bm.save()
         bmid = "BaseModel." + bm.id
-        with open("file.json", "r") as f:
+        with open("data.json", "r") as f:
             self.assertIn(bmid, f.read())
 
 
