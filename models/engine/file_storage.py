@@ -10,8 +10,8 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-class FileStorage():
-    """Represent an abstracted storage engine for managing object instances.
+class FileStorage:
+    """Represent an abstracted storage engine for managing object instances
 
     This class provides an abstracted interface for storing and retrieving
     object instances. It allows objects to be serialized and deserialized
@@ -48,7 +48,7 @@ class FileStorage():
     def reload(self):
         """Deserializes the JSON file to objects."""
         try:
-            with open(FileStorage.__file_path) as file:
+            with open(FileStorage.__file_path, "r") as file:
                 obj_dict = json.load(file)
                 for val in obj_dict.values():
                     class_name = val["__class__"]
