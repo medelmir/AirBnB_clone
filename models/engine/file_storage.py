@@ -11,7 +11,7 @@ from models.review import Review
 
 
 class FileStorage:
-    """Represent an abstracted storage engine for managing object instances.
+    """Represent an abstracted storage engine for managing object instances
 
     This class provides an abstracted interface for storing and retrieving
     object instances. It allows objects to be serialized and deserialized
