@@ -1,0 +1,22 @@
+.places_title h1 {
+    text-align: left;
+    font-size: 30px;
+}
+article {
+    width: 390px;
+    height: 30px;
+    padding: 20px;
+    margin: 20px;
+    border: #FF5A5F 1px solid;
+    border-radius: 4px;
+}
+.articles h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-top: auto;
+}
+.articles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
